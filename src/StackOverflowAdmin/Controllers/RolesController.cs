@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Http.Internal;
 using StackOverflowAdmin.Models;
+using Microsoft.Data.Entity;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace StackOverflowAdmin.Controllers
 {
@@ -64,6 +66,40 @@ namespace StackOverflowAdmin.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Edit(string roleName)
+        {
+            var thisRole = _db.Roles.Where(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+
+            return View(thisRole);
+        }
+    
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Microsoft.AspNet.Identity.EntityFramework.IdentityRole role)
+        {
+            try
+            {
+                _db.Entry(role).State = EntityState.Modified;
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult ManageUserRoles()
+        {
+            var list = _db.Roles.OrderBy(r => r.Name).ToList().Select(rr =>
+
+new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            ViewBag.Roles = list;
+            return View();
+        }
+
 
     }
 }
