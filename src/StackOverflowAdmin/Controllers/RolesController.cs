@@ -57,5 +57,13 @@ namespace StackOverflowAdmin.Controllers
                 return View();
             }
         }
+        public ActionResult Delete(string RoleName)
+        {
+            var thisRole = _db.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            _db.Roles.Remove(thisRole);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }
