@@ -1,8 +1,10 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Stack Overflow";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using System.Security.Claims
 
 <h2>Stack Overflow!</h2>
+
+@Html.ActionLink("Go to your questions", "Index", "Question")

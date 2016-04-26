@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Questions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using System.Security.Claims
+@model IEnumerable<StackOverflowAdmin.Models.Question>
+
+<h2>Here are your list of your questions, @User.GetUserName()</h2>
+<hr />
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var listQuestion in Model)
+        {
+            <li>@Html.DisplayFor(modelQuestion => listQuestion.Description)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No tasks have been added yet!</p>
+}
+
+
+@Html.ActionLink("Add a question", "Create")
+<br />
+@Html.ActionLink("Home", "Index", "Account")
