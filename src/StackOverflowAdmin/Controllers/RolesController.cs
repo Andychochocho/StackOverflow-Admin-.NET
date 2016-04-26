@@ -9,6 +9,7 @@ using Microsoft.AspNet.Http.Internal;
 using StackOverflowAdmin.Models;
 using Microsoft.Data.Entity;
 using Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.AspNet.Authorization;
 
 namespace StackOverflowAdmin.Controllers
 {
@@ -95,7 +96,7 @@ namespace StackOverflowAdmin.Controllers
         {
             var list = _db.Roles.OrderBy(r => r.Name).ToList().Select(rr =>
 
-new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = list;
             return View();
         }
@@ -116,8 +117,16 @@ new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             return View("ManageUserRoles");
         }
 
+        [Authorize(Roles = "Admin")]
+        public ApplicationUser GetUser(string UserName)
+        {
+            return _userManager.Users
+                .FirstOrDefault(m => m.UserName == UserName);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult GetRoles(string UserName)
         {
 
@@ -137,6 +146,13 @@ new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             return View("ManageUserRoles");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteRoleForUser(string UserName, string RoleName)
+        {
+            var role = _userManager.RemoveFromRoleAsync(GetUser(UserName), RoleName).Result;
 
+            return RedirectToAction("ManageUserRoles");
+        }
     }
 }
