@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9290AF78-77FC-4F1C-BCA2-4F6679ED193E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5FB4AAE-532C-4E20-AED2-8E07FAE43A64}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StackOverflowAdmin", "src\StackOverflowAdmin\StackOverflowAdmin.xproj", "{6798C403-EEDF-432B-942B-8CEE2236C207}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6798C403-EEDF-432B-942B-8CEE2236C207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6798C403-EEDF-432B-942B-8CEE2236C207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6798C403-EEDF-432B-942B-8CEE2236C207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6798C403-EEDF-432B-942B-8CEE2236C207}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6798C403-EEDF-432B-942B-8CEE2236C207} = {9290AF78-77FC-4F1C-BCA2-4F6679ED193E}
+	EndGlobalSection
+EndGlobal
